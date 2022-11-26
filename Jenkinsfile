@@ -11,6 +11,17 @@ pipeline {
             }
         }
 
+        stage('Code Quality'){
+            steps{
+                scrips{
+                    def scannerHome = tool 'sonarqube';
+                    withSonarQubeEnv("sonarqube"){
+                        sh"${tool("sonarqube")}/bin/sonar-scanner"
+                    }
+                }
+            }
+        }
+
         stage('Archive Unit Tests Results') {
             steps {
                 echo 'Archive Unit Test Results'
