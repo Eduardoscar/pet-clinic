@@ -11,6 +11,18 @@ pipeline {
             }
         }
 
+        stage('Code Quality'){
+            steps{
+                scrips{
+                   sh 'sonar-scanner \
+                      -Dsonar.projectKey=Prueba \
+                      -Dsonar.sources=. \
+                      -Dsonar.host.url=http://172.17.0.5:9000 \
+                      -Dsonar.login=squ_e788b56ade6945f7e4e7ad32c4c0f1ca368c4db0'
+                }
+            }
+        }
+
         stage('Archive Unit Tests Results') {
             steps {
                 echo 'Archive Unit Test Results'
