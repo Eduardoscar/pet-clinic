@@ -17,6 +17,7 @@ pipeline {
                 sh 'mvn clean package sonar:sonar'
               }
             }
+        }
 
         stage('Archive Unit Tests Results') {
             steps {
