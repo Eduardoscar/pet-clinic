@@ -11,15 +11,12 @@ pipeline {
             }
         }
 
-        stage('Code Quality'){
+        stage("build & SonarQube analysis") {
             steps {
-                step (def scannerHome = tool 'sonarqube';)
-                withSonarQubeEnv("sonarqube") {
-                    sh "${tool("sonarqube")}/bin/sonar-scanner"
-                }    
-            }    
-            
-        }    
+              withSonarQubeEnv('sonarqube') {
+                sh 'mvn clean package sonar:sonar'
+              }
+            }
 
         stage('Archive Unit Tests Results') {
             steps {
